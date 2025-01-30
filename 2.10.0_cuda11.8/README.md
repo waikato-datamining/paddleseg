@@ -123,18 +123,10 @@ docker run -u $(id -u):$(id -g) -e USER=$USER ...
 PaddleSeg will download pretrained models and cache them locally. To avoid having
 to download them constantly, you can the cache directory to the host machine:
 
-* when running the container as `root`
-
-  ```bash
-  -v /some/where/cache:/root/.torch \
-  -v /some/where/cache/iopath_cache:/tmp/iopath_cache \
-  ```
-
 * when running the container as current user
 
   ```bash
-  -v /some/where/cache:/.torch \
-  -v /some/where/cache/iopath_cache:/tmp/iopath_cache \
+  -v /some/where/cache:/.paddleseg \
   ```
 
 
@@ -142,4 +134,5 @@ to download them constantly, you can the cache directory to the host machine:
 
 The following additional scripts are available:
 
+* `paddleseg_train` - for training models (calls the `/opt/PaddleSeg/tools/train.py` script)
 * ...
