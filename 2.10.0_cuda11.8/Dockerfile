@@ -36,6 +36,7 @@ RUN git clone https://github.com/PaddlePaddle/PaddleSeg.git && \
     pip install --no-cache-dir -U "numpy<2.0.0"
 
 COPY bash.bashrc /etc/bash.bashrc
+COPY export_config.py /opt/PaddleSeg/tools/
 COPY paddleclas_* /usr/bin/
 
 # paddlepaddle-gpu looks for: /usr/local/cuda/lib64/libcudnn.so

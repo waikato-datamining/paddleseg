@@ -134,5 +134,6 @@ to download them constantly, you can the cache directory to the host machine:
 
 The following additional scripts are available:
 
+* `paddleclas_export_config` - for exporting template config files and setting parameters (calls the `/opt/PaddleSeg/tools/export_config.py` script)
 * `paddleseg_train` - for training models (calls the `/opt/PaddleSeg/tools/train.py` script)
 * ...
