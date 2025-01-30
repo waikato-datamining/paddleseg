@@ -1,5 +1,7 @@
 test/
 cache/
+visualdl/
+data/
 predictions/
 output/
 *.zip

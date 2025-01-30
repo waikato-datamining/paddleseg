@@ -181,4 +181,6 @@ output/
 *.zip
 Paddle*release*/
 paddleseg/
-
+cache/
+visualdl/
+data/
