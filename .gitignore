@@ -180,4 +180,5 @@ test/
 output/
 *.zip
 Paddle*release*/
+paddleseg/
 
