@@ -140,21 +140,26 @@ def export(input_file: str, output_file: str, train_annotations: str = None, val
 
     if train_annotations is not None:
         set_value(config, ["train_dataset", "type"], "Dataset")
-        set_value(config, ["train_dataset", "num_classes"], num_classes)
         set_value(config, ["train_dataset", "dataset_root"], os.path.dirname(train_annotations))
         set_value(config, ["train_dataset", "train_path"], train_annotations)
+        if num_classes is not None:
+            set_value(config, ["train_dataset", "num_classes"], num_classes)
 
     if val_annotations is not None:
         set_value(config, ["val_dataset", "type"], "Dataset")
-        set_value(config, ["val_dataset", "num_classes"], num_classes)
         set_value(config, ["val_dataset", "dataset_root"], os.path.dirname(val_annotations))
         set_value(config, ["val_dataset", "val_path"], val_annotations)
+        if num_classes is not None:
+            set_value(config, ["val_dataset", "num_classes"], num_classes)
 
     if batch_size is not None:
         set_value(config, ["batch_size"], batch_size)
 
     if num_iters is not None:
         set_value(config, ["iters"], num_iters)
+
+    if num_classes is not None:
+        set_value(config, ["model", "num_classes"], num_classes)
 
     if additional is not None:
         for add in additional:
