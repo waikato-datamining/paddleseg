@@ -37,7 +37,7 @@ RUN git clone https://github.com/PaddlePaddle/PaddleSeg.git && \
 
 COPY bash.bashrc /etc/bash.bashrc
 COPY export_config.py /opt/PaddleSeg/tools/
-COPY paddleclas_* /usr/bin/
+COPY paddleseg_* /usr/bin/
 
 # paddlepaddle-gpu looks for: /usr/local/cuda/lib64/libcudnn.so
 RUN ln -s /opt/conda/lib/python3.11/site-packages/nvidia/cudnn/lib/libcudnn.so.9 /usr/local/cuda/lib64/libcudnn.so
