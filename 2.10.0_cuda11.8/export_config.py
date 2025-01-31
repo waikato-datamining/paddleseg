@@ -4,6 +4,8 @@ import traceback
 import yaml
 from typing import Optional, List, Any
 
+from paddleseg.cvlibs.config import Config
+
 
 def check_file(file_type: str, path: Optional[str]):
     """
@@ -61,6 +63,11 @@ def set_value(config: dict, path: List[str], value: Any):
             if index < len(current):
                 current = current[index]
         else:
+            # not present, we'll just add it
+            if i == len(path) - 1:
+                print("Adding option: %s" % (str(path)))
+                current[path[i]] = value
+                found = True
             break
     if not found:
         print("Failed to locate path in config: %s" % str(path))
@@ -128,8 +135,8 @@ def export(input_file: str, output_file: str, train_annotations: str = None, val
 
     # load template
     print("Loading config from: %s" % input_file)
-    with open(input_file, 'r') as fp:
-        config = yaml.safe_load(fp)
+    config = Config(input_file)
+    config = config.dic
 
     if train_annotations is not None:
         set_value(config, ["train_dataset", "type"], "Dataset")
