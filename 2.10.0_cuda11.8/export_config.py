@@ -186,7 +186,7 @@ def main(args=None):
     parser.add_argument("-t", "--train_annotations", metavar="FILE", required=False, help="The text file with the labels for the training data (images are expected to be located below that directory).")
     parser.add_argument("-v", "--val_annotations", metavar="FILE", required=False, help="The text file with the labels for the validation data (images are expected to be located below that directory).")
     parser.add_argument("-c", "--num_classes", metavar="NUM", required=False, type=int, help="The number of classes in the dataset.")
-    parser.add_argument("-i", "--num_iters", metavar="NUM", required=False, type=int, help="The number of iterations to train.")
+    parser.add_argument("-I", "--num_iters", metavar="NUM", required=False, type=int, help="The number of iterations to train.")
     parser.add_argument("-a", "--additional", metavar="PATH:VALUE", required=False, help="Additional parameters to override; format: PATH:VALUE, with PATH representing the dot-notation path through the parameter hierarchy in the YAML file, if VALUE is to update a list, then the elements must be separated by comma.", nargs="*")
     parser.add_argument("-r", "--remove", metavar="PATH", required=False, help="Parameters to remove; format: PATH, with PATH representing the dot-notation path through the parameter hierarchy in the YAML file", nargs="*")
     parsed = parser.parse_args(args=args)
