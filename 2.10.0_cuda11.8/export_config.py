@@ -178,8 +178,8 @@ def main(args=None):
     """
 
     parser = argparse.ArgumentParser(
-        description='Exports a PaddleClas config file and updates specific fields with user-supplied values.',
-        prog="paddleclas_export_config",
+        description='Exports a PaddleSeg config file and updates specific fields with user-supplied values.',
+        prog="paddleseg_export_config",
         formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument("-i", "--input", metavar="FILE", required=True, help="The PaddleClass YAML config file template to export.")
     parser.add_argument("-o", "--output", metavar="FILE", required=True, help="The YAML file to store the exported config file in.")
