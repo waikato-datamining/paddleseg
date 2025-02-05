@@ -123,7 +123,7 @@ def predict_on_images(input_dir, model, transforms, output_dir, tmp_dir, predict
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description="PaddleSeg - Prediction", prog="paddleseg_predict_poll")
+    parser = argparse.ArgumentParser(description="PaddleSeg - Prediction", prog="paddleseg_predict_poll", formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('--config', help='Path to the config file', required=True, default=None)
     parser.add_argument('--model_path', help='Path to the trained model (.pdparams file)', required=True, default=None)
     parser.add_argument('--device', help='The device to use', default="gpu:0")
