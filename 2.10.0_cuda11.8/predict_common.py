@@ -194,3 +194,26 @@ def prediction_to_data(prediction, prediction_format: str, mask_nth: int = 1, cl
         raise Exception("Unhandled format: %s" % prediction_format)
 
     return result
+
+
+def classes_dict(path: str) -> Dict[int, str]:
+    """
+    Loads the labels file (one label per line), background must be listed explicitly.
+
+    :param path: the path to the file
+    :type path: str
+    :return: the generated dictionary
+    :rtype: dict
+    """
+    result = dict()
+
+    if os.path.exists(path):
+        with open(path, "r") as fp:
+            lines = fp.readlines()
+            classes = [x.strip() for x in lines]
+    else:
+        raise Exception("Labels file does not exist: %s" % path)
+    for i, cls in enumerate(classes):
+        result[i] = cls
+
+    return result

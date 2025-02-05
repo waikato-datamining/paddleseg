@@ -4,7 +4,7 @@ import traceback
 import cv2
 
 from rdh import Container, MessageContainer, create_parser, configure_redis, run_harness, log
-from predict_common import prediction_to_data, PREDICTION_FORMATS, PREDICTION_FORMAT_GRAYSCALE, load_model
+from predict_common import prediction_to_data, PREDICTION_FORMATS, PREDICTION_FORMAT_GRAYSCALE, load_model, classes_dict
 import paddle
 from paddleseg.core.predict import preprocess
 from paddleseg.core import infer
@@ -59,6 +59,7 @@ if __name__ == '__main__':
     parser.add_argument('--model_path', help='Path to the trained model (.pdparams file)', required=True, default=None)
     parser.add_argument('--device', help='The device to use', default="gpu:0")
     parser.add_argument('--prediction_format', default=PREDICTION_FORMAT_GRAYSCALE, choices=PREDICTION_FORMATS, help='The format for the prediction images')
+    parser.add_argument('--labels', help='Path to the text file with the labels; one per line, including background', required=True, default=None)
     parser.add_argument('--mask_nth', type=int, help='To speed polygon detection up, use every nth row and column only (OPEX format only)', required=False, default=1)
     parser.add_argument('--verbose', action='store_true', help='Whether to output more logging info', required=False, default=False)
     parsed = parser.parse_args()
@@ -71,6 +72,7 @@ if __name__ == '__main__':
         config.transforms = transforms
         config.prediction_format = parsed.prediction_format
         config.mask_nth = parsed.mask_nth
+        config.classes = classes_dict(parsed.labels)
         config.verbose = parsed.verbose
 
         params = configure_redis(parsed, config=config)

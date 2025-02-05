@@ -4,7 +4,7 @@ from image_complete import auto
 import traceback
 
 from sfp import Poller
-from predict_common import prediction_to_file, PREDICTION_FORMATS, PREDICTION_FORMAT_GRAYSCALE, load_model
+from predict_common import prediction_to_file, PREDICTION_FORMATS, PREDICTION_FORMAT_GRAYSCALE, load_model, classes_dict
 import paddle
 from paddleseg.core.predict import preprocess
 from paddleseg.core import infer
@@ -67,8 +67,8 @@ def process_image(fname, output_dir, poller):
     return result
 
 
-def predict_on_images(input_dir, model, transforms, output_dir, tmp_dir, prediction_format="grayscale", mask_nth=1,
-                      poll_wait=1.0, continuous=False, use_watchdog=False, watchdog_check_interval=10.0,
+def predict_on_images(input_dir, model, transforms, output_dir, tmp_dir, prediction_format="grayscale", labels=None,
+                      mask_nth=1, poll_wait=1.0, continuous=False, use_watchdog=False, watchdog_check_interval=10.0,
                       delete_input=False, verbose=False, quiet=False):
     """
     Method for performing predictions on images.
@@ -83,6 +83,8 @@ def predict_on_images(input_dir, model, transforms, output_dir, tmp_dir, predict
     :type tmp_dir: str
     :param prediction_format: the format to use for the prediction images (grayscale/bluechannel)
     :type prediction_format: str
+    :param labels: the path to the file with the labels (one per line, including background)
+    :type labels: str
     :param mask_nth: the contour tracing can be slow for large masks, by using only every nth row/col, this can be sped up dramatically
     :type mask_nth: int
     :param poll_wait: the amount of seconds between polls when not in watchdog mode
@@ -119,6 +121,7 @@ def predict_on_images(input_dir, model, transforms, output_dir, tmp_dir, predict
     poller.params.transforms = transforms
     poller.params.prediction_format = prediction_format
     poller.params.mask_nth = mask_nth
+    poller.params.classes = classes_dict(labels)
     poller.poll()
 
 
@@ -127,6 +130,7 @@ if __name__ == '__main__':
     parser.add_argument('--config', help='Path to the config file', required=True, default=None)
     parser.add_argument('--model_path', help='Path to the trained model (.pdparams file)', required=True, default=None)
     parser.add_argument('--device', help='The device to use', default="gpu:0")
+    parser.add_argument('--labels', help='Path to the text file with the labels; one per line, including background', required=True, default=None)
     parser.add_argument('--prediction_in', help='Path to the test images', required=True, default=None)
     parser.add_argument('--prediction_out', help='Path to the output csv files folder', required=True, default=None)
     parser.add_argument('--prediction_tmp', help='Path to the temporary csv files folder', required=False, default=None)
@@ -146,7 +150,7 @@ if __name__ == '__main__':
 
         # Performing the prediction and producing the predictions files
         predict_on_images(parsed.prediction_in, model, transforms, parsed.prediction_out, parsed.prediction_tmp,
-                          prediction_format=parsed.prediction_format, continuous=parsed.continuous,
+                          prediction_format=parsed.prediction_format, labels=parsed.labels, continuous=parsed.continuous,
                           use_watchdog=parsed.use_watchdog, watchdog_check_interval=parsed.watchdog_check_interval,
                           delete_input=parsed.delete_input, verbose=parsed.verbose, quiet=parsed.quiet)
 
