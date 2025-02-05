@@ -126,7 +126,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="PaddleSeg - Prediction", prog="paddleseg_predict_poll")
     parser.add_argument('--config', help='Path to the config file', required=True, default=None)
     parser.add_argument('--model_path', help='Path to the trained model (.pdparams file)', required=True, default=None)
-    parser.add_argument('--device', help='The device to use', default="cuda:0")
+    parser.add_argument('--device', help='The device to use', default="gpu:0")
     parser.add_argument('--prediction_in', help='Path to the test images', required=True, default=None)
     parser.add_argument('--prediction_out', help='Path to the output csv files folder', required=True, default=None)
     parser.add_argument('--prediction_tmp', help='Path to the temporary csv files folder', required=False, default=None)
