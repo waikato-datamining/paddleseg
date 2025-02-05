@@ -139,4 +139,5 @@ The following additional scripts are available:
 * `paddleseg_export` - for exporting models (calls the `/opt/PaddleSeg/tools/export.py` script)
 * `paddleseg_val` - for evaluating models (calls the `/opt/PaddleSeg/tools/val.py` script)
 * `paddleseg_predict` - for generating predictions of supplied files (calls the `/opt/PaddleSeg/tools/predict.py` script)
-* ...
+* `paddleseg_predict_poll` - for generating predictions of supplied files in batch/poll mode (calls the `/opt/PaddleSeg/tools/predict_poll.py` script)
+* `paddleseg_predict_redis` - for generating predictions via Redis (calls the `/opt/PaddleSeg/tools/predict_redis.py` script)
