@@ -103,7 +103,7 @@ docker build -t paddleseg:2.10.0_cuda11.8 .
 
 ```bash
 docker run --rm \
-  -it public.aml-repo.cms.waikato.ac.nz:443/pytorch/paddleseg:2.10.0_cuda11.8 \
+  -it public.aml-repo.cms.waikato.ac.nz:443/paddleseg/paddleseg:2.10.0_cuda11.8 \
   pip freeze > requirements.txt
 ```
 
