@@ -19,7 +19,7 @@ Uses PyTorch 2.5.1, CUDA 11.8 and PaddleSeg 2.10.0.
   ```bash
   docker run --gpus=all --shm-size 8G --net=host \
     -v /local/dir:/container/dir \
-    -it public.aml-repo.cms.waikato.ac.nz:443/pytorch/paddleseg:2.10.0_cuda11.8
+    -it public.aml-repo.cms.waikato.ac.nz:443/paddle/paddleseg:2.10.0_cuda11.8
   ```
 
 ### Docker hub
@@ -63,13 +63,13 @@ docker build -t paddleseg:2.10.0_cuda11.8 .
   ```bash
   docker tag \
     paddleseg:2.10.0_cuda11.8 \
-    public-push.aml-repo.cms.waikato.ac.nz:443/pytorch/paddleseg:2.10.0_cuda11.8
+    public-push.aml-repo.cms.waikato.ac.nz:443/paddle/paddleseg:2.10.0_cuda11.8
   ```
   
 * Push
 
   ```bash
-  docker push public-push.aml-repo.cms.waikato.ac.nz:443/pytorch/paddleseg:2.10.0_cuda11.8
+  docker push public-push.aml-repo.cms.waikato.ac.nz:443/paddle/paddleseg:2.10.0_cuda11.8
   ```
   If error "no basic auth credentials" occurs, then run (enter username/password when prompted):
   
