@@ -44,7 +44,8 @@ def load_model(config: str, model_path: str, device: str) -> Tuple:
     utils.set_device(device)
     cfg = Config(config)
     builder = SegBuilder(cfg)
-    model = utils.utils.load_entire_model(builder.model, model_path)
+    model = builder.model
+    utils.utils.load_entire_model(model, model_path)
     model.eval()
     transforms = Compose(builder.val_transforms)
     return model, transforms
