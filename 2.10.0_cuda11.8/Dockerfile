@@ -24,7 +24,9 @@ RUN pip install --no-cache-dir \
         redis \
         "fast-opex==0.0.4" \
         orjson \
-        "redis-docker-harness==0.0.4"
+        "redis-docker-harness==0.0.4" \
+        simple-mask-utils==0.0.1 \
+        "simple_palette_utils"
 
 WORKDIR /opt
 
@@ -37,6 +39,7 @@ RUN git clone https://github.com/PaddlePaddle/PaddleSeg.git && \
 
 COPY bash.bashrc /etc/bash.bashrc
 COPY export_config.py /opt/PaddleSeg/tools/
+COPY predict*.py /opt/PaddleSeg/tools/
 COPY paddleseg_* /usr/bin/
 
 # paddlepaddle-gpu looks for: /usr/local/cuda/lib64/libcudnn.so

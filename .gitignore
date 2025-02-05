@@ -179,6 +179,7 @@ cython_debug/
 test/
 output/
 *.zip
+*.tar.gz
 Paddle*release*/
 paddleseg/
 cache/
