@@ -12,6 +12,11 @@ RUN pip install --no-cache-dir torch==1.11.0+cpu torchvision==0.12.0+cpu \
 
 WORKDIR /opt
 
+# see instructions for specific cuda version
+# https://www.paddlepaddle.org.cn/documentation/docs/en/install/pip/linux-pip_en.html#choose-cpu-gpu
+RUN pip install -U --no-cache-dir \
+        "paddlepaddle==2.6.2" -i https://www.paddlepaddle.org.cn/packages/stable/cpu/
+
 RUN git clone https://github.com/PaddlePaddle/PaddleSeg.git && \
     cd PaddleSeg && \
     git reset --hard d459390adcec7fa6dd010c21b71aeb73f2afded9 && \
