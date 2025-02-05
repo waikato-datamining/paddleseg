@@ -19,6 +19,16 @@ RUN git clone https://github.com/PaddlePaddle/PaddleSeg.git && \
     pip install --no-cache-dir -v -e . && \
     pip install --no-cache-dir -U "numpy<2.0.0"
 
+RUN pip install --no-cache-dir \
+        python-image-complete \
+        "simple_file_poller>=0.0.12" \
+        redis \
+        "fast-opex==0.0.4" \
+        orjson \
+        "redis-docker-harness==0.0.4" \
+        simple-mask-utils==0.0.1 \
+        "simple_palette_utils"
+
 RUN ln -s /usr/bin/python3 /usr/bin/python
 COPY bash.bashrc /etc/bash.bashrc
 COPY export_config.py /opt/PaddleSeg/tools/
