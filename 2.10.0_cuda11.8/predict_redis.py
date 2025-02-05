@@ -55,8 +55,8 @@ def process_image(msg_cont):
 
 if __name__ == '__main__':
     parser = create_parser('PaddleSeg - Prediction (Redis)', prog="paddleseg_predict_redis", prefix="redis_")
-    parser.add_argument('--model', help='Path to the trained model (.pdparams file)', required=True, default=None)
     parser.add_argument('--config', help='Path to the config file', required=True, default=None)
+    parser.add_argument('--model_path', help='Path to the trained model (.pdparams file)', required=True, default=None)
     parser.add_argument('--device', help='The device to use', default="cuda:0")
     parser.add_argument('--prediction_format', default=PREDICTION_FORMAT_GRAYSCALE, choices=PREDICTION_FORMATS, help='The format for the prediction images')
     parser.add_argument('--mask_nth', type=int, help='To speed polygon detection up, use every nth row and column only (OPEX format only)', required=False, default=1)
@@ -64,7 +64,7 @@ if __name__ == '__main__':
     parsed = parser.parse_args()
 
     try:
-        model, transforms = load_model(parsed.config, parsed.model, parsed.device)
+        model, transforms = load_model(parsed.config, parsed.model_path, parsed.device)
 
         config = Container()
         config.model = model
