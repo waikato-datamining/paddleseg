@@ -129,7 +129,6 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="PaddleSeg - Prediction", prog="paddleseg_predict_poll", formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('--config', help='Path to the config file', required=True, default=None)
     parser.add_argument('--model_path', help='Path to the trained model (.pdparams file)', required=True, default=None)
-    parser.add_argument('--device', help='The device to use', default="gpu:0")
     parser.add_argument('--labels', help='Path to the text file with the labels; one per line, including background', required=True, default=None)
     parser.add_argument('--prediction_in', help='Path to the test images', required=True, default=None)
     parser.add_argument('--prediction_out', help='Path to the output csv files folder', required=True, default=None)
@@ -146,7 +145,7 @@ if __name__ == '__main__':
     parsed = parser.parse_args()
 
     try:
-        model, transforms = load_model(parsed.config, parsed.model_path, parsed.device)
+        model, transforms = load_model(parsed.config, parsed.model_path, "cpu")
 
         # Performing the prediction and producing the predictions files
         predict_on_images(parsed.prediction_in, model, transforms, parsed.prediction_out, parsed.prediction_tmp,
