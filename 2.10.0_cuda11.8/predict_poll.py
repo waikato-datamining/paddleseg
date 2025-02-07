@@ -46,6 +46,7 @@ def process_image(fname, output_dir, poller):
     result = []
 
     try:
+        # TODO batches?
         with paddle.no_grad():
             data = preprocess(fname, transforms)
             pred, _ = infer.inference(
