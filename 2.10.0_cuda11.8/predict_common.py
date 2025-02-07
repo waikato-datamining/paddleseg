@@ -36,7 +36,7 @@ def load_model(config: str, model_path: str, device: str) -> Tuple:
     :type config: str
     :param model_path: the path to the trained model (.pdparams file)
     :type model_path: str
-    :param device: the device to use, e.g., cuda:0 or cpu
+    :param device: the device to use, e.g., gpu:0 or cpu
     :type device: str
     :return: the tuple of model and validation transformations
     :rtype: tuple
