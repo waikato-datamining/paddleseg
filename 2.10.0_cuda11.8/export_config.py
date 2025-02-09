@@ -24,6 +24,54 @@ def check_file(file_type: str, path: Optional[str]):
             raise IOError("%s points to a directory: %s" % (file_type, path))
 
 
+def is_bool(s: str) -> bool:
+    """
+    Checks whether the string is a boolean value.
+
+    :param s: the string to check
+    :type s: str
+    :return: True if a boolean
+    :rtype: bool
+    """
+    try:
+        bool(s)
+        return True
+    except:
+        return False
+
+
+def is_int(s: str) -> bool:
+    """
+    Checks whether the string is an int value.
+
+    :param s: the string to check
+    :type s: str
+    :return: True if an int
+    :rtype: bool
+    """
+    try:
+        int(s)
+        return True
+    except:
+        return False
+
+
+def is_float(s: str) -> bool:
+    """
+    Checks whether the string is a float value.
+
+    :param s: the string to check
+    :type s: str
+    :return: True if a float
+    :rtype: bool
+    """
+    try:
+        float(s)
+        return True
+    except:
+        return False
+
+
 def set_value(config: dict, path: List[str], value: Any):
     """
     Sets the value in the YAML config according to its path.
@@ -42,7 +90,9 @@ def set_value(config: dict, path: List[str], value: Any):
                 current = current[path[i]]
             else:
                 found = True
-                if isinstance(current[path[i]], int):
+                if isinstance(current[path[i]], bool):
+                    current[path[i]] = bool(value)
+                elif isinstance(current[path[i]], int):
                     current[path[i]] = int(value)
                 elif isinstance(current[path[i]], float):
                     current[path[i]] = float(value)
@@ -50,7 +100,9 @@ def set_value(config: dict, path: List[str], value: Any):
                     values = value.split(",")
                     # can we infer type?
                     if len(current[path[i]]) > 0:
-                        if isinstance(current[path[i]][0], int):
+                        if isinstance(current[path[i]][0], bool):
+                            current[path[i]] = [bool(x) for x in values]
+                        elif isinstance(current[path[i]][0], int):
                             current[path[i]] = [int(x) for x in values]
                         elif isinstance(current[path[i]][0], float):
                             current[path[i]] = [float(x) for x in values]
@@ -66,7 +118,14 @@ def set_value(config: dict, path: List[str], value: Any):
             # not present, we'll just add it
             if i == len(path) - 1:
                 print("Adding option: %s" % (str(path)))
-                current[path[i]] = value
+                if is_bool(value):
+                    current[path[i]] = bool(value)
+                elif is_int(value):
+                    current[path[i]] = int(value)
+                elif is_float(value):
+                    current[path[i]] = float(value)
+                else:
+                    current[path[i]] = value
                 found = True
             break
     if not found:
@@ -98,7 +157,7 @@ def remove_value(config: dict, path: List[str]):
         else:
             break
     if not removed:
-        print("Failed to locate path in config: %s" % str(path))
+        print("Failed to locate path in config, cannot remove: %s" % str(path))
 
 
 def export(input_file: str, output_file: str, train_annotations: str = None, val_annotations: str = None,
