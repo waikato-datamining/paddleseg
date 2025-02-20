@@ -36,6 +36,18 @@ def is_bool(s: str) -> bool:
     return (s.lower() == "true") or (s.lower() == "false")
 
 
+def parse_bool(s: str) -> bool:
+    """
+    Returns True if the lower case of the string is "true".
+
+    :param s: the string to evaluate
+    :type s: str
+    :return: True if "true"
+    :rtype: bool
+    """
+    return s.lower() == "true"
+
+
 def is_int(s: str) -> bool:
     """
     Checks whether the string is an int value.
@@ -86,7 +98,9 @@ def set_value(config: dict, path: List[str], value: Any):
                 current = current[path[i]]
             else:
                 found = True
-                if isinstance(current[path[i]], int):
+                if isinstance(current[path[i]], bool):
+                    current[path[i]] = parse_bool(value)
+                elif isinstance(current[path[i]], int):
                     current[path[i]] = int(value)
                 elif isinstance(current[path[i]], float):
                     current[path[i]] = float(value)
@@ -94,7 +108,9 @@ def set_value(config: dict, path: List[str], value: Any):
                     values = value.split(",")
                     # can we infer type?
                     if len(current[path[i]]) > 0:
-                        if isinstance(current[path[i]][0], int):
+                        if isinstance(current[path[i]][0], bool):
+                            current[path[i]] = [parse_bool(x) for x in values]
+                        elif isinstance(current[path[i]][0], int):
                             current[path[i]] = [int(x) for x in values]
                         elif isinstance(current[path[i]][0], float):
                             current[path[i]] = [float(x) for x in values]
@@ -111,7 +127,7 @@ def set_value(config: dict, path: List[str], value: Any):
             if i == len(path) - 1:
                 print("Adding option: %s" % (str(path)))
                 if is_bool(value):
-                    current[path[i]] = bool(value)
+                    current[path[i]] = parse_bool(value)
                 elif is_int(value):
                     current[path[i]] = int(value)
                 elif is_float(value):
