@@ -24,6 +24,50 @@ def check_file(file_type: str, path: Optional[str]):
             raise IOError("%s points to a directory: %s" % (file_type, path))
 
 
+def is_bool(s: str) -> bool:
+    """
+    Checks whether the string is a boolean value.
+
+    :param s: the string to check
+    :type s: str
+    :return: True if a boolean
+    :rtype: bool
+    """
+    return (s.lower() == "true") or (s.lower() == "false")
+
+
+def is_int(s: str) -> bool:
+    """
+    Checks whether the string is an int value.
+
+    :param s: the string to check
+    :type s: str
+    :return: True if an int
+    :rtype: bool
+    """
+    try:
+        int(s)
+        return True
+    except:
+        return False
+
+
+def is_float(s: str) -> bool:
+    """
+    Checks whether the string is a float value.
+
+    :param s: the string to check
+    :type s: str
+    :return: True if a float
+    :rtype: bool
+    """
+    try:
+        float(s)
+        return True
+    except:
+        return False
+
+
 def set_value(config: dict, path: List[str], value: Any):
     """
     Sets the value in the YAML config according to its path.
@@ -66,7 +110,14 @@ def set_value(config: dict, path: List[str], value: Any):
             # not present, we'll just add it
             if i == len(path) - 1:
                 print("Adding option: %s" % (str(path)))
-                current[path[i]] = value
+                if is_bool(value):
+                    current[path[i]] = bool(value)
+                elif is_int(value):
+                    current[path[i]] = int(value)
+                elif is_float(value):
+                    current[path[i]] = float(value)
+                else:
+                    current[path[i]] = value
                 found = True
             break
     if not found:
