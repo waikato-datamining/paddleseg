@@ -1,11 +1,30 @@
-anyio==4.6.2.post1
+
+==========
+== CUDA ==
+==========
+
+CUDA Version 11.8.0
+
+Container image Copyright (c) 2016-2023, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+A copy of this license is made available in this container at /NGC-DL-CONTAINER-LICENSE for your convenience.
+
+WARNING: The NVIDIA Driver was not detected.  GPU functionality will not be available.
+   Use the NVIDIA Container Toolkit to start this container with GPU support; see
+   https://docs.nvidia.com/datacenter/cloud-native/ .
+
+anyio==4.8.0
 archspec @ file:///home/conda/feedstock_root/build_artifacts/archspec_1708969572489/work
 astor==0.8.1
 asttokens @ file:///home/conda/feedstock_root/build_artifacts/asttokens_1698341106958/work
 astunparse==1.6.3
 attrs @ file:///home/conda/feedstock_root/build_artifacts/attrs_1722977137225/work
 babel==2.17.0
-bce-python-sdk==0.9.25
+bce-python-sdk==0.9.29
 beautifulsoup4 @ file:///home/conda/feedstock_root/build_artifacts/beautifulsoup4_1705564648255/work
 blinker==1.9.0
 boltons @ file:///home/conda/feedstock_root/build_artifacts/boltons_1711936407380/work
@@ -34,15 +53,15 @@ fast-opex==0.0.4
 filelock @ file:///home/conda/feedstock_root/build_artifacts/filelock_1726613473834/work
 Flask==3.1.0
 flask-babel==4.0.0
-fonttools==4.55.8
+fonttools==4.56.0
 frozendict @ file:///home/conda/feedstock_root/build_artifacts/frozendict_1728841334936/work
 fsspec==2024.10.0
 future==1.0.0
 h11==0.14.0
 h2 @ file:///home/conda/feedstock_root/build_artifacts/h2_1634280454336/work
 hpack==4.0.0
-httpcore==1.0.6
-httpx==0.27.2
+httpcore==1.0.7
+httpx==0.28.1
 hyperframe @ file:///home/conda/feedstock_root/build_artifacts/hyperframe_1619110129307/work
 hypothesis==6.115.5
 idna @ file:///home/conda/feedstock_root/build_artifacts/idna_1726459485162/work
@@ -65,7 +84,7 @@ lief @ file:///home/conda/feedstock_root/build_artifacts/lief_1726040283347/work
 lintrunner==0.12.5
 mamba @ file:///home/conda/feedstock_root/build_artifacts/mamba-split_1727883551957/work/mamba
 MarkupSafe @ file:///home/conda/feedstock_root/build_artifacts/markupsafe_1729351299924/work
-matplotlib==3.10.0
+matplotlib==3.10.1
 matplotlib-inline @ file:///home/conda/feedstock_root/build_artifacts/matplotlib-inline_1713250518406/work
 menuinst @ file:///home/conda/feedstock_root/build_artifacts/menuinst_1725359023560/work
 more-itertools @ file:///home/conda/feedstock_root/build_artifacts/more-itertools_1725630081114/work
@@ -87,7 +106,7 @@ nvidia-nvtx-cu11==11.8.86
 opencv-python==4.5.5.64
 opt-einsum==3.3.0
 optree==0.13.0
-orjson==3.10.15
+orjson==3.10.16
 packaging @ file:///home/conda/feedstock_root/build_artifacts/packaging_1718189413536/work
 paddlepaddle-gpu==2.6.2
 -e git+https://github.com/PaddlePaddle/PaddleSeg.git@d459390adcec7fa6dd010c21b71aeb73f2afded9#egg=paddleseg
@@ -100,17 +119,17 @@ pkginfo @ file:///home/conda/feedstock_root/build_artifacts/pkginfo_172861651692
 pkgutil_resolve_name @ file:///home/conda/feedstock_root/build_artifacts/pkgutil-resolve-name_1694617248815/work
 platformdirs @ file:///home/conda/feedstock_root/build_artifacts/platformdirs_1726613481435/work
 pluggy @ file:///home/conda/feedstock_root/build_artifacts/pluggy_1713667077545/work
-prettytable==3.14.0
+prettytable==3.16.0
 prompt_toolkit @ file:///home/conda/feedstock_root/build_artifacts/prompt-toolkit_1727341649933/work
-protobuf==5.28.3
+protobuf==5.29.3
 psutil @ file:///home/conda/feedstock_root/build_artifacts/psutil_1729847065645/work
 ptyprocess @ file:///home/conda/feedstock_root/build_artifacts/ptyprocess_1609419310487/work/dist/ptyprocess-0.7.0-py2.py3-none-any.whl
 pure_eval @ file:///home/conda/feedstock_root/build_artifacts/pure_eval_1721585709575/work
 pycosat @ file:///home/conda/feedstock_root/build_artifacts/pycosat_1696355758146/work
 pycparser @ file:///home/conda/feedstock_root/build_artifacts/pycparser_1711811537435/work
-pycryptodome==3.21.0
+pycryptodome==3.22.0
 Pygments @ file:///home/conda/feedstock_root/build_artifacts/pygments_1714846767233/work
-pyparsing==3.2.1
+pyparsing==3.2.2
 PySocks @ file:///home/conda/feedstock_root/build_artifacts/pysocks_1661604839144/work
 python-dateutil==2.9.0.post0
 python-etcd==0.4.5
@@ -125,9 +144,9 @@ requests @ file:///home/conda/feedstock_root/build_artifacts/requests_1717057054
 rpds-py @ file:///home/conda/feedstock_root/build_artifacts/rpds-py_1725327039958/work
 ruamel.yaml @ file:///home/conda/feedstock_root/build_artifacts/ruamel.yaml_1728764976564/work
 ruamel.yaml.clib @ file:///home/conda/feedstock_root/build_artifacts/ruamel.yaml.clib_1728724459810/work
-scikit-image==0.25.1
+scikit-image==0.25.2
 scikit-learn==1.6.1
-scipy==1.15.1
+scipy==1.15.2
 simple-mask-utils==0.0.1
 simple_file_poller==0.0.13
 simple_palette_utils==0.0.4
@@ -137,8 +156,8 @@ sortedcontainers==2.4.0
 soupsieve @ file:///home/conda/feedstock_root/build_artifacts/soupsieve_1693929250441/work
 stack-data @ file:///home/conda/feedstock_root/build_artifacts/stack_data_1669632077133/work
 sympy==1.13.1
-threadpoolctl==3.5.0
-tifffile==2025.1.10
+threadpoolctl==3.6.0
+tifffile==2025.3.13
 torch==2.5.1+cu118
 torchaudio==2.5.1+cu118
 torchelastic==0.2.2
@@ -149,7 +168,7 @@ triton==3.1.0
 truststore @ file:///home/conda/feedstock_root/build_artifacts/truststore_1724770958874/work
 types-dataclasses==0.6.6
 typing_extensions @ file:///home/conda/feedstock_root/build_artifacts/typing_extensions_1717802530399/work
-tzdata==2025.1
+tzdata==2025.2
 urllib3 @ file:///home/conda/feedstock_root/build_artifacts/urllib3_1726496430923/work
 visualdl==2.5.3
 watchdog==6.0.0
