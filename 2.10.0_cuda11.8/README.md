@@ -107,6 +107,8 @@ docker run --rm --pull=always \
   pip freeze > requirements.txt
 ```
 
+**NB:** Check for CUDA preamble and remove if necessary.
+
 
 ## Permissions
 
