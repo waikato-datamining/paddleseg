@@ -102,7 +102,7 @@ docker build -t paddleseg:2.10.0_cpu .
 ### Requirements
 
 ```bash
-docker run --rm \
+docker run --rm --pull=always \
   -it public.aml-repo.cms.waikato.ac.nz:443/paddle/paddleseg:2.10.0_cpu \
   pip freeze > requirements.txt
 ```
