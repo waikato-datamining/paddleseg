@@ -24,16 +24,15 @@ def check_file(file_type: str, path: Optional[str]):
             raise IOError("%s points to a directory: %s" % (file_type, path))
 
 
-def is_bool(s: str) -> bool:
+def is_bool(s) -> bool:
     """
     Checks whether the string is a boolean value.
 
-    :param s: the string to check
-    :type s: str
+    :param s: the object/string to check
     :return: True if a boolean
     :rtype: bool
     """
-    return (s.lower() == "true") or (s.lower() == "false")
+    return (str(s).lower() == "true") or (str(s).lower() == "false")
 
 
 def parse_bool(s: str) -> bool:
@@ -45,36 +44,34 @@ def parse_bool(s: str) -> bool:
     :return: True if "true"
     :rtype: bool
     """
-    return s.lower() == "true"
+    return str(s).lower() == "true"
 
 
-def is_int(s: str) -> bool:
+def is_int(s) -> bool:
     """
-    Checks whether the string is an int value.
+    Checks whether the object/string is an int value.
 
-    :param s: the string to check
-    :type s: str
+    :param s: the objct/string to check
     :return: True if an int
     :rtype: bool
     """
     try:
-        int(s)
+        int(str(s))
         return True
     except:
         return False
 
 
-def is_float(s: str) -> bool:
+def is_float(s) -> bool:
     """
-    Checks whether the string is a float value.
+    Checks whether the object/string is a float value.
 
-    :param s: the string to check
-    :type s: str
+    :param s: the object/string to check
     :return: True if a float
     :rtype: bool
     """
     try:
-        float(s)
+        float(str(s))
         return True
     except:
         return False
