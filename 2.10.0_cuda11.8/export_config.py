@@ -240,6 +240,9 @@ def export(input_file: str, output_file: str, train_annotations: str = None, val
             remove_value(config, path)
 
     print("Saving config to: %s" % output_file)
+    output_dir = os.path.dirname(output_file)
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir, exist_ok=True)
     with open(output_file, "w") as fp:
         yaml.dump(config, fp)
 
