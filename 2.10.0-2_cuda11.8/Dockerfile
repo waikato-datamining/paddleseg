@@ -16,7 +16,7 @@ RUN apt-get update && \
 # see instructions for specific cuda version
 # https://www.paddlepaddle.org.cn/documentation/docs/en/install/pip/linux-pip_en.html#choose-cpu-gpu
 RUN pip install -U --no-cache-dir \
-        "paddlepaddle-gpu==3.0.0" -i https://www.paddlepaddle.org.cn/packages/stable/cu126/
+        "paddlepaddle-gpu==2.6.2" -i https://www.paddlepaddle.org.cn/packages/stable/cu118/
 
 RUN pip install --no-cache-dir \
         python-image-complete \
