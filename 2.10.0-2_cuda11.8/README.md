@@ -19,7 +19,7 @@ Uses CUDA 12.6 and PaddleSeg 2.10.0.
   ```bash
   docker run --gpus=all --shm-size 8G --net=host \
     -v /local/dir:/container/dir \
-    -it public.aml-repo.cms.waikato.ac.nz:443/paddle/paddleseg:2.10.0_cuda12.6
+    -it public.aml-repo.cms.waikato.ac.nz:443/paddle/paddleseg:2.10.0-2_cuda11.8
   ```
 
 ### Docker hub
@@ -29,12 +29,12 @@ Uses CUDA 12.6 and PaddleSeg 2.10.0.
   ```bash
   docker run --gpus=all --shm-size 8G --net=host \
     -v /local/dir:/container/dir \
-    -it waikatodatamining/paddleseg:2.10.0_cuda12.6
+    -it waikatodatamining/paddleseg:2.10.0-2_cuda11.8
   ```
 
 ### Build local image
 
-* Build the image from Docker file (from within /path_to/paddleseg/2.10.0_cuda12.6)
+* Build the image from Docker file (from within /path_to/paddleseg/2.10.0-2_cuda11.8)
 
   ```bash
   docker build -t paddleseg .
@@ -53,7 +53,7 @@ Uses CUDA 12.6 and PaddleSeg 2.10.0.
 ### Build
 
 ```bash
-docker build -t paddleseg:2.10.0_cuda12.6 .
+docker build -t paddleseg:2.10.0-2_cuda11.8 .
 ```
 
 ### Inhouse registry  
@@ -62,14 +62,14 @@ docker build -t paddleseg:2.10.0_cuda12.6 .
 
   ```bash
   docker tag \
-    paddleseg:2.10.0_cuda12.6 \
-    public-push.aml-repo.cms.waikato.ac.nz:443/paddle/paddleseg:2.10.0_cuda12.6
+    paddleseg:2.10.0-2_cuda11.8 \
+    public-push.aml-repo.cms.waikato.ac.nz:443/paddle/paddleseg:2.10.0-2_cuda11.8
   ```
   
 * Push
 
   ```bash
-  docker push public-push.aml-repo.cms.waikato.ac.nz:443/paddle/paddleseg:2.10.0_cuda12.6
+  docker push public-push.aml-repo.cms.waikato.ac.nz:443/paddle/paddleseg:2.10.0-2_cuda11.8
   ```
   If error "no basic auth credentials" occurs, then run (enter username/password when prompted):
   
@@ -83,14 +83,14 @@ docker build -t paddleseg:2.10.0_cuda12.6 .
 
   ```bash
   docker tag \
-    paddleseg:2.10.0_cuda12.6 \
-    waikatodatamining/paddleseg:2.10.0_cuda12.6
+    paddleseg:2.10.0-2_cuda11.8 \
+    waikatodatamining/paddleseg:2.10.0-2_cuda11.8
   ```
   
 * Push
 
   ```bash
-  docker push waikatodatamining/paddleseg:2.10.0_cuda12.6
+  docker push waikatodatamining/paddleseg:2.10.0-2_cuda11.8
   ```
   If error "no basic auth credentials" occurs, then run (enter username/password when prompted):
   
@@ -103,7 +103,7 @@ docker build -t paddleseg:2.10.0_cuda12.6 .
 
 ```bash
 docker run --rm --pull=always \
-  -it public.aml-repo.cms.waikato.ac.nz:443/paddle/paddleseg:2.10.0_cuda12.6 \
+  -it public.aml-repo.cms.waikato.ac.nz:443/paddle/paddleseg:2.10.0-2_cuda11.8 \
   pip freeze > requirements.txt
 ```
 

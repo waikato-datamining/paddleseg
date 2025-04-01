@@ -1,5 +1,5 @@
 ARG PYTORCH="2.6.0"
-ARG CUDA="12.6"
+ARG CUDA="11.8"
 ARG CUDNN="9"
 
 ARG DOCKER_REGISTRY=public.aml-repo.cms.waikato.ac.nz:443/
@@ -16,7 +16,7 @@ RUN apt-get update && \
 # see instructions for specific cuda version
 # https://www.paddlepaddle.org.cn/documentation/docs/en/install/pip/linux-pip_en.html#choose-cpu-gpu
 RUN pip install -U --no-cache-dir \
-        "paddlepaddle-gpu==2.6.2" -i https://www.paddlepaddle.org.cn/packages/stable/cu118/
+        "paddlepaddle-gpu==3.0.0" -i https://www.paddlepaddle.org.cn/packages/stable/cu126/
 
 RUN pip install --no-cache-dir \
         python-image-complete \
