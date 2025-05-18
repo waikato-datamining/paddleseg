@@ -2,7 +2,7 @@
 
 Uses [PaddleSeg](https://github.com/PaddlePaddle/PaddleSeg) ([documentation](https://github.com/PaddlePaddle/PaddleSeg/blob/release/2.10/README_EN.md)). 
 
-Uses CUDA 12.6 and PaddleSeg 2.10.0.
+Uses CUDA 11.8 and PaddleSeg 2.10.0.
 
 ## Quick start
 
