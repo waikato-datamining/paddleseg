@@ -34,6 +34,7 @@ WORKDIR /opt
 RUN git clone https://github.com/PaddlePaddle/PaddleSeg.git && \
     cd PaddleSeg && \
     git reset --hard d459390adcec7fa6dd010c21b71aeb73f2afded9 && \
+    rm -Rf .git && \
     pip install --no-cache-dir -r requirements.txt && \
     pip install --no-cache-dir -v -e . && \
     pip install --no-cache-dir -U "numpy<2.0.0"
