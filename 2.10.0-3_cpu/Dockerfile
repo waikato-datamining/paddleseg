@@ -33,8 +33,7 @@ RUN pip install --no-cache-dir \
         orjson \
         "redis-docker-harness==0.0.4" \
         simple-mask-utils==0.0.1 \
-        "simple_palette_utils" \
-        "simple_image_ops"
+        "simple_palette_utils"
 
 RUN ln -s /usr/bin/python3 /usr/bin/python
 COPY bash.bashrc /etc/bash.bashrc

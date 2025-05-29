@@ -8,7 +8,6 @@ from predict_common import prediction_to_data, PREDICTION_FORMATS, PREDICTION_FO
 import paddle
 from paddleseg.core.predict import preprocess
 from paddleseg.core import infer
-from simops import resize, KEEP_ASPECT_RATIO
 
 
 def process_image(msg_cont):
@@ -25,8 +24,6 @@ def process_image(msg_cont):
 
         array = np.frombuffer(msg_cont.message['data'], np.uint8)
         image = cv2.imdecode(array, cv2.IMREAD_COLOR)
-        if (config.img_width != KEEP_ASPECT_RATIO) or (config.img_height != KEEP_ASPECT_RATIO):
-            image = resize(image, width=config.img_width, height=config.img_height)
 
         with paddle.no_grad():
             # TODO binary data as input?
@@ -35,9 +32,9 @@ def process_image(msg_cont):
                 model,
                 data['img'],
                 trans_info=data['trans_info'],
-                is_slide=False,
-                stride=False,
-                crop_size=None,
+                is_slide=config.is_slide,
+                stride=config.stride,
+                crop_size=config.crop_size,
                 use_multilabel=False)
         out_data = prediction_to_data(pred, config.prediction_format,
                                       mask_nth=config.mask_nth, classes=config.classes)
@@ -63,8 +60,9 @@ if __name__ == '__main__':
     parser.add_argument('--device', help='The device to use', default="gpu:0")
     parser.add_argument('--prediction_format', default=PREDICTION_FORMAT_GRAYSCALE, choices=PREDICTION_FORMATS, help='The format for the prediction images')
     parser.add_argument('--labels', help='Path to the text file with the labels; one per line, including background', required=True, default=None)
-    parser.add_argument('--img_width', type=int, help='The width to resize the images to, keeps the aspect ratio if height is omitted.', required=False, default=None)
-    parser.add_argument('--img_height', type=int, help='The height to resize the images to, keeps the aspect ratio if width is omitted.', required=False, default=None)
+    parser.add_argument('--is_slide', help='Whether to predict images in sliding window method', action='store_true')
+    parser.add_argument('--crop_size', nargs=2, help='The crop size of sliding window, the first is width and the second is height. For example, `--crop_size 512 512`', type=int)
+    parser.add_argument('--stride', nargs=2, help='The stride of sliding window, the first is width and the second is height. For example, `--stride 512 512`', type=int)
     parser.add_argument('--mask_nth', type=int, help='To speed polygon detection up, use every nth row and column only (OPEX format only)', required=False, default=1)
     parser.add_argument('--verbose', action='store_true', help='Whether to output more logging info', required=False, default=False)
     parsed = parser.parse_args()
@@ -76,8 +74,9 @@ if __name__ == '__main__':
         config.model = model
         config.transforms = transforms
         config.prediction_format = parsed.prediction_format
-        config.img_width = KEEP_ASPECT_RATIO if (parsed.img_width is None) else parsed.img_width
-        config.img_height = KEEP_ASPECT_RATIO if (parsed.img_height is None) else parsed.img_height
+        config.is_slide = parsed.is_slide
+        config.crop_size = parsed.crop_size
+        config.stride = parsed.stride
         config.mask_nth = parsed.mask_nth
         config.classes = classes_dict(parsed.labels)
         config.verbose = parsed.verbose

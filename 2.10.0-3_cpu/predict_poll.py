@@ -1,4 +1,3 @@
-import cv2
 import os
 import argparse
 from image_complete import auto
@@ -9,7 +8,6 @@ from predict_common import prediction_to_file, PREDICTION_FORMATS, PREDICTION_FO
 import paddle
 from paddleseg.core.predict import preprocess
 from paddleseg.core import infer
-from simops import resize, KEEP_ASPECT_RATIO
 
 
 SUPPORTED_EXTS = [".jpg", ".jpeg"]
@@ -50,17 +48,14 @@ def process_image(fname, output_dir, poller):
     try:
         # TODO batches?
         with paddle.no_grad():
-            image = cv2.imread(fname)
-            if (poller.params.img_width != KEEP_ASPECT_RATIO) or (poller.params.img_height != KEEP_ASPECT_RATIO):
-                image = resize(image, width=poller.params.img_width, height=poller.params.img_height)
-            data = preprocess(image, transforms)
+            data = preprocess(fname, transforms)
             pred, _ = infer.inference(
                 model,
                 data['img'],
                 trans_info=data['trans_info'],
-                is_slide=False,
-                stride=False,
-                crop_size=None,
+                is_slide=poller.params.is_slide,
+                stride=poller.params.stride,
+                crop_size=poller.params.crop_size,
                 use_multilabel=False)
         fname_out = os.path.join(output_dir, os.path.splitext(os.path.basename(fname))[0] + ".png")
         fname_out = prediction_to_file(pred, poller.params.prediction_format, fname_out,
@@ -74,7 +69,7 @@ def process_image(fname, output_dir, poller):
 
 
 def predict_on_images(input_dir, model, transforms, output_dir, tmp_dir, prediction_format="grayscale", labels=None,
-                      img_width=None, img_height=None, mask_nth=1, poll_wait=1.0, continuous=False, use_watchdog=False, watchdog_check_interval=10.0,
+                      is_slide=False, crop_size=None, stride=False, mask_nth=1, poll_wait=1.0, continuous=False, use_watchdog=False, watchdog_check_interval=10.0,
                       delete_input=False, verbose=False, quiet=False):
     """
     Method for performing predictions on images.
@@ -91,10 +86,12 @@ def predict_on_images(input_dir, model, transforms, output_dir, tmp_dir, predict
     :type prediction_format: str
     :param labels: the path to the file with the labels (one per line, including background)
     :type labels: str
-    :param img_width: the image width to resize the images, keeps aspect ratio if image height is omitted
-    :type img_width: int
-    :param img_height: the image height to resize the images, keeps aspect ratio if image width is omitted
-    :type img_height: int
+    :param is_slide: Whether to predict images in sliding window method
+    :type is_slide: bool
+    :param crop_size: The crop size of sliding window, the first is width and the second is height.
+    :type crop_size: tuple
+    :param stride: The stride of sliding window, the first is width and the second is height.
+    :type stride: bool
     :param mask_nth: the contour tracing can be slow for large masks, by using only every nth row/col, this can be sped up dramatically
     :type mask_nth: int
     :param poll_wait: the amount of seconds between polls when not in watchdog mode
@@ -130,8 +127,9 @@ def predict_on_images(input_dir, model, transforms, output_dir, tmp_dir, predict
     poller.params.model = model
     poller.params.transforms = transforms
     poller.params.prediction_format = prediction_format
-    poller.params.img_width = KEEP_ASPECT_RATIO if (img_width is None) else img_width
-    poller.params.img_height = KEEP_ASPECT_RATIO if (img_height is None) else img_height
+    poller.params.is_slide = is_slide
+    poller.params.crop_size = crop_size
+    poller.params.stride = stride
     poller.params.mask_nth = mask_nth
     poller.params.classes = classes_dict(labels)
     poller.poll()
@@ -146,8 +144,9 @@ if __name__ == '__main__':
     parser.add_argument('--prediction_out', help='Path to the output csv files folder', required=True, default=None)
     parser.add_argument('--prediction_tmp', help='Path to the temporary csv files folder', required=False, default=None)
     parser.add_argument('--prediction_format', default=PREDICTION_FORMAT_GRAYSCALE, choices=PREDICTION_FORMATS, help='The format for the prediction images')
-    parser.add_argument('--img_width', type=int, help='The width to resize the images to, keeps the aspect ratio if height is omitted.', required=False, default=None)
-    parser.add_argument('--img_height', type=int, help='The height to resize the images to, keeps the aspect ratio if width is omitted.', required=False, default=None)
+    parser.add_argument('--is_slide', help='Whether to predict images in sliding window method', action='store_true')
+    parser.add_argument('--crop_size', nargs=2, help='The crop size of sliding window, the first is width and the second is height. For example, `--crop_size 512 512`', type=int)
+    parser.add_argument('--stride', nargs=2, help='The stride of sliding window, the first is width and the second is height. For example, `--stride 512 512`', type=int)
     parser.add_argument('--mask_nth', type=int, help='To speed polygon detection up, use every nth row and column only (OPEX format only)', required=False, default=1)
     parser.add_argument('--poll_wait', type=float, help='poll interval in seconds when not using watchdog mode', required=False, default=1.0)
     parser.add_argument('--continuous', action='store_true', help='Whether to continuously load test images and perform prediction', required=False, default=False)
@@ -164,7 +163,7 @@ if __name__ == '__main__':
         # Performing the prediction and producing the predictions files
         predict_on_images(parsed.prediction_in, model, transforms, parsed.prediction_out, parsed.prediction_tmp,
                           prediction_format=parsed.prediction_format, labels=parsed.labels, mask_nth=parsed.mask_nth,
-                          img_width=parsed.img_width, img_height=parsed.img_height, continuous=parsed.continuous,
+                          is_slide=parsed.is_slide, stride=parsed.stride, crop_size=parsed.crop_size, continuous=parsed.continuous,
                           use_watchdog=parsed.use_watchdog, watchdog_check_interval=parsed.watchdog_check_interval,
                           delete_input=parsed.delete_input, verbose=parsed.verbose, quiet=parsed.quiet)
 
