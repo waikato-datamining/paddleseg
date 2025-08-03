@@ -141,3 +141,10 @@ The following additional scripts are available:
 * `paddleseg_predict` - for generating predictions of supplied files (calls the `/opt/PaddleSeg/tools/predict.py` script)
 * `paddleseg_predict_poll` - for generating predictions of supplied files in batch/poll mode (calls the `/opt/PaddleSeg/tools/predict_poll.py` script)
 * `paddleseg_predict_redis` - for generating predictions via Redis (calls the `/opt/PaddleSeg/tools/predict_redis.py` script)
+
+
+## Troubleshooting
+
+* Blanks in image names causes *ValueError: File list format incorrect! In training or evaluation task it should be image_name label_name*
+
+  **Solution:** Add parameter `separator: ;` below `train_dataset:` and `val_dataset:` sections
