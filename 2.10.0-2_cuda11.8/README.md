@@ -149,4 +149,4 @@ The following additional scripts are available:
 
 * Blanks in image names causes *ValueError: File list format incorrect! In training or evaluation task it should be image_name label_name*
 
-  **Solution:** Add parameter `separator: ;` below `train_dataset:` and `val_dataset:` sections
+  **Solution:** Use `;` as separator when generating the dataset and then add parameter `separator: ;` below `train_dataset:` and `val_dataset:` sections
