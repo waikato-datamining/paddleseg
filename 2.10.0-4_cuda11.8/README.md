@@ -19,7 +19,7 @@ Uses CUDA 11.8 and PaddleSeg 2.10.0.
   ```bash
   docker run --gpus=all --shm-size 8G --net=host \
     -v /local/dir:/container/dir \
-    -it public.aml-repo.cms.waikato.ac.nz:443/paddle/paddleseg:2.10.0-4_cuda11.8
+    -it harbor.cms.waikato.ac.nz/public/paddle/paddleseg:2.10.0-4_cuda11.8
   ```
 
 ### Docker hub
@@ -63,13 +63,13 @@ docker build -t paddleseg:2.10.0-4_cuda11.8 .
   ```bash
   docker tag \
     paddleseg:2.10.0-4_cuda11.8 \
-    public-push.aml-repo.cms.waikato.ac.nz:443/paddle/paddleseg:2.10.0-4_cuda11.8
+    harbor.cms.waikato.ac.nz/public/paddle/paddleseg:2.10.0-4_cuda11.8
   ```
   
 * Push
 
   ```bash
-  docker push public-push.aml-repo.cms.waikato.ac.nz:443/paddle/paddleseg:2.10.0-4_cuda11.8
+  docker push harbor.cms.waikato.ac.nz/public/paddle/paddleseg:2.10.0-4_cuda11.8
   ```
   If error "no basic auth credentials" occurs, then run (enter username/password when prompted):
   
@@ -103,7 +103,7 @@ docker build -t paddleseg:2.10.0-4_cuda11.8 .
 
 ```bash
 docker run --rm --pull=always \
-  -it public.aml-repo.cms.waikato.ac.nz:443/paddle/paddleseg:2.10.0-4_cuda11.8 \
+  -it harbor.cms.waikato.ac.nz/public/paddle/paddleseg:2.10.0-4_cuda11.8 \
   pip freeze > requirements.txt
 ```
 

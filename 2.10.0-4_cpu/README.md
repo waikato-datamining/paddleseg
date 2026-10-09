@@ -19,7 +19,7 @@ Uses PaddleSeg 2.10.0.
   ```bash
   docker run --shm-size 8G --net=host \
     -v /local/dir:/container/dir \
-    -it public.aml-repo.cms.waikato.ac.nz:443/paddle/paddleseg:2.10.0-4_cpu
+    -it harbor.cms.waikato.ac.nz/public/paddle/paddleseg:2.10.0-4_cpu
   ```
 
 ### Docker hub
@@ -63,13 +63,13 @@ docker build -t paddleseg:2.10.0-4_cpu .
   ```bash
   docker tag \
     paddleseg:2.10.0-4_cpu \
-    public-push.aml-repo.cms.waikato.ac.nz:443/paddle/paddleseg:2.10.0-4_cpu
+    harbor.cms.waikato.ac.nz/public/paddle/paddleseg:2.10.0-4_cpu
   ```
   
 * Push
 
   ```bash
-  docker push public-push.aml-repo.cms.waikato.ac.nz:443/paddle/paddleseg:2.10.0-4_cpu
+  docker push harbor.cms.waikato.ac.nz/public/paddle/paddleseg:2.10.0-4_cpu
   ```
   If error "no basic auth credentials" occurs, then run (enter username/password when prompted):
   
@@ -103,7 +103,7 @@ docker build -t paddleseg:2.10.0-4_cpu .
 
 ```bash
 docker run --rm --pull=always \
-  -it public.aml-repo.cms.waikato.ac.nz:443/paddle/paddleseg:2.10.0-4_cpu \
+  -it harbor.cms.waikato.ac.nz/public/paddle/paddleseg:2.10.0-4_cpu \
   pip freeze > requirements.txt
 ```
 
