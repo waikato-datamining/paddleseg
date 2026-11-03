@@ -2,7 +2,7 @@
 
 Uses [PaddleSeg](https://github.com/PaddlePaddle/PaddleSeg) ([documentation](https://github.com/PaddlePaddle/PaddleSeg/blob/release/2.10/README_EN.md)). 
 
-Uses CUDA 11.8 and PaddleSeg 2.10.0.
+Uses CUDA 12.6 and PaddleSeg 2.10.0.
 
 ## Quick start
 
@@ -19,7 +19,7 @@ Uses CUDA 11.8 and PaddleSeg 2.10.0.
   ```bash
   docker run --gpus=all --shm-size 8G --net=host \
     -v /local/dir:/container/dir \
-    -it harbor.cms.waikato.ac.nz/public/paddle/paddleseg:2.10.0-4_cuda11.8
+    -it harbor.cms.waikato.ac.nz/public/paddle/paddleseg:2.10.0-4_cuda12.6
   ```
 
 ### Docker hub
@@ -29,12 +29,12 @@ Uses CUDA 11.8 and PaddleSeg 2.10.0.
   ```bash
   docker run --gpus=all --shm-size 8G --net=host \
     -v /local/dir:/container/dir \
-    -it waikatodatamining/paddleseg:2.10.0-4_cuda11.8
+    -it waikatodatamining/paddleseg:2.10.0-4_cuda12.6
   ```
 
 ### Build local image
 
-* Build the image from Docker file (from within /path_to/paddleseg/2.10.0-4_cuda11.8)
+* Build the image from Docker file (from within /path_to/paddleseg/2.10.0-4_cuda12.6)
 
   ```bash
   docker build -t paddleseg .
@@ -53,7 +53,7 @@ Uses CUDA 11.8 and PaddleSeg 2.10.0.
 ### Build
 
 ```bash
-docker build -t paddleseg:2.10.0-4_cuda11.8 .
+docker build -t paddleseg:2.10.0-4_cuda12.6 .
 ```
 
 ### Inhouse registry  
@@ -62,14 +62,14 @@ docker build -t paddleseg:2.10.0-4_cuda11.8 .
 
   ```bash
   docker tag \
-    paddleseg:2.10.0-4_cuda11.8 \
-    harbor.cms.waikato.ac.nz/public/paddle/paddleseg:2.10.0-4_cuda11.8
+    paddleseg:2.10.0-4_cuda12.6 \
+    harbor.cms.waikato.ac.nz/public/paddle/paddleseg:2.10.0-4_cuda12.6
   ```
   
 * Push
 
   ```bash
-  docker push harbor.cms.waikato.ac.nz/public/paddle/paddleseg:2.10.0-4_cuda11.8
+  docker push harbor.cms.waikato.ac.nz/public/paddle/paddleseg:2.10.0-4_cuda12.6
   ```
   If error "no basic auth credentials" occurs, then run (enter username/password when prompted):
   
@@ -83,14 +83,14 @@ docker build -t paddleseg:2.10.0-4_cuda11.8 .
 
   ```bash
   docker tag \
-    paddleseg:2.10.0-4_cuda11.8 \
-    waikatodatamining/paddleseg:2.10.0-4_cuda11.8
+    paddleseg:2.10.0-4_cuda12.6 \
+    waikatodatamining/paddleseg:2.10.0-4_cuda12.6
   ```
   
 * Push
 
   ```bash
-  docker push waikatodatamining/paddleseg:2.10.0-4_cuda11.8
+  docker push waikatodatamining/paddleseg:2.10.0-4_cuda12.6
   ```
   If error "no basic auth credentials" occurs, then run (enter username/password when prompted):
   
@@ -103,7 +103,7 @@ docker build -t paddleseg:2.10.0-4_cuda11.8 .
 
 ```bash
 docker run --rm --pull=always \
-  -it harbor.cms.waikato.ac.nz/public/paddle/paddleseg:2.10.0-4_cuda11.8 \
+  -it harbor.cms.waikato.ac.nz/public/paddle/paddleseg:2.10.0-4_cuda12.6 \
   pip freeze > requirements.txt
 ```
 
