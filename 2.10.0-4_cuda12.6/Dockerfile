@@ -41,10 +41,4 @@ COPY export_config.py /opt/PaddleSeg/tools/
 COPY predict*.py /opt/PaddleSeg/tools/
 COPY paddleseg_* /usr/bin/
 
-# paddlepaddle-gpu looks for: /usr/local/cuda/lib64/libcudnn.so
-RUN ln -s /usr/local/lib/python3.12/dist-packages/nvidia/cudnn/lib/libcudnn.so.9 /usr/local/cuda/lib64/libcudnn.so
-
-ENV CUDA_HOME=/usr/local/cuda-12.6
-ENV PATH=/usr/local/cuda-12.6/bin:$PATH
-ENV LD_LIBRARY_PATH=/usr/local/cuda-12.6/lib64:/usr/local/lib/python3.12/dist-packages/nvidia/cudnn/lib:$LD_LIBRARY_PATH
 ENV PYTHONPATH=/opt/PaddleSeg
