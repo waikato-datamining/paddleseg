@@ -3,6 +3,7 @@ Docker images for [PaddleSeg](https://github.com/PaddlePaddle/PaddleSeg) Deep Le
 
 Available versions (CUDA):
 
+* [2.10.0-4 (CUDA 13.2)](2.10.0-4_cuda13.2)
 * [2.10.0-4 (CUDA 12.6)](2.10.0-4_cuda12.6)
 * [2.10.0-4 (CUDA 11.8)](2.10.0-4_cuda11.8)
 * [2.10.0-3 (CUDA 11.8)](2.10.0-3_cuda11.8)
