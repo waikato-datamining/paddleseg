@@ -1,3 +1,0 @@
-#!/bin/bash
-
-/opt/PaddleSeg.venv/bin/python3 /opt/PaddleSeg/tools/export_config.py "$@"
