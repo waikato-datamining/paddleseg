@@ -104,7 +104,7 @@ docker build -t paddleseg:2.10.0-4_cuda13.0 .
 ```bash
 docker run --rm --pull=always \
   -it harbor.cms.waikato.ac.nz/public/paddle/paddleseg:2.10.0-4_cuda13.0 \
-  pip freeze > requirements.txt
+  /opt/PaddleSeg.venv/bin/pip freeze > requirements.txt
 ```
 
 **NB:** Check for CUDA preamble and remove if necessary.
