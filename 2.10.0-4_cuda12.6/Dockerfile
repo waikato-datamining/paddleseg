@@ -34,7 +34,7 @@ RUN git clone https://github.com/PaddlePaddle/PaddleSeg.git && \
     rm -Rf .git && \
     /opt/PaddleSeg.venv/bin/pip install --no-cache-dir -r requirements.txt && \
     /opt/PaddleSeg.venv/bin/pip install --no-cache-dir -v -e . && \
-    /opt/PaddleSeg.venv/bin/pip install --no-cache-dir -U "numpy<2.0.0"
+    /opt/PaddleSeg.venv/bin/pip install --no-cache-dir -U "numpy<2.0.0" "scipy==1.15.3"
 
 COPY bash.bashrc /etc/bash.bashrc
 COPY export_config.py /opt/PaddleSeg/tools/
