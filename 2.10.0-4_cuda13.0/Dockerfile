@@ -1,5 +1,5 @@
-ARG PYTORCH="2.15.0"
-ARG CUDA="13.2"
+ARG PYTORCH="2.14.1"
+ARG CUDA="13.0"
 ARG CUDNN="9"
 
 FROM pytorch/pytorch:${PYTORCH}-cuda${CUDA}-cudnn${CUDNN}-devel
@@ -14,7 +14,7 @@ RUN python3 -m venv --system-site-packages /opt/PaddleSeg.venv
 # see instructions for specific cuda version
 # https://www.paddlepaddle.org.cn/documentation/docs/en/install/pip/linux-pip_en.html#choose-cpu-gpu
 RUN /opt/PaddleSeg.venv/bin/pip install -U --no-cache-dir \
-        "paddlepaddle-gpu==3.4.0.post20260612+99af93f9466" -i https://www.paddlepaddle.org.cn/packages/stable/cu132/
+        "paddlepaddle-gpu==3.3.1" -i https://www.paddlepaddle.org.cn/packages/stable/cu130/
 
 RUN /opt/PaddleSeg.venv/bin/pip install --no-cache-dir \
         python-image-complete \
