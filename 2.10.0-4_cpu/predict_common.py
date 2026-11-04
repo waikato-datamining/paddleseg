@@ -41,6 +41,7 @@ def load_model(config: str, model_path: str, device: str) -> Tuple:
     :return: the tuple of model and validation transformations
     :rtype: tuple
     """
+    print("Loading model: %s" % model_path)
     utils.set_device(device)
     cfg = Config(config)
     builder = SegBuilder(cfg)
@@ -48,6 +49,7 @@ def load_model(config: str, model_path: str, device: str) -> Tuple:
     utils.utils.load_entire_model(model, model_path)
     model.eval()
     transforms = Compose(builder.val_transforms)
+    print("Model loaded!")
     return model, transforms
 
 
